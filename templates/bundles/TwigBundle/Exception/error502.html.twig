@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{status_code}} Bad Gateway !{% endblock %}
+
+{% block body %}
+    <div class="error pb-5">
+        <h1 class="mb-5">Bad Gateway ! Erreur {{status_code}}</h1>
+        <p>Problème de connectivité au réseaux. Le serveur à rencontrée un problème et ne peut pas compléter la requête.</p>
+        <hr class="my-5">
+        <p class="mb-5">Vérifiez votre connection internet ou vérifiez si le site que vous essayez d'atteindre est opérationnel en utilisant un test de ping.</p>
+        <i class="error_500_microchip fas fa-microchip">
+            <i class="error_500_ban fas fa-ban"></i>  
+        </i>  
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page non trouvée{% endblock %}
+
+{% block body %}
+    <div class="error pb-5">
+        <h1 class="mb-5">Page non trouvée ! Erreur {{status_code}}</h1>
+        <p>La page que vous cherchez n'a pas été trouvée.</p>
+        <hr class="my-5">
+        <p class="mb-5" >Vérifiez l'URL ou rechargez la page svp.</p>
+        <i class="fas fa-mug-hot"></i>        
+    </div>
+{% endblock %}

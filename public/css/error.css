@@ -1,0 +1,38 @@
+.error{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.error p {
+    margin: 0;
+}
+.error hr {
+    width: 50%;
+    border: 4px #8a2a2d;
+}
+.error i {
+    font-size: 8rem;
+    color: #8a2a2d;
+}
+.error_500_ban {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    font-size: 10rem !important;
+}
+.error_500_microchip {
+    margin-bottom: 40px !important;
+    font-size: 5rem !important;
+    position: relative;
+}
+.error_502_ban {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    font-size: 10rem !important;
+}
+.error_502_microchip {
+    margin-bottom: 40px !important;
+    font-size: 5rem !important;
+    position: relative;
+}

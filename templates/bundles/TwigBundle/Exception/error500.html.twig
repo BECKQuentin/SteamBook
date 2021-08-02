@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{status_code}} Problème de serveur !{% endblock %}
+
+{% block body %}
+    <div class="error pb-5">
+        <h1 class="mb-5">Le serveur rencontre un problème ! Erreur {{status_code}}</h1>
+        <p>Le serveur à rencontrée un problème et ne peut pas complétée la requête.</p>
+        <hr class="my-5">
+        <p class="mb-5">Merci de rechargez la page ultérieurement.</p>
+        <i class="error_500_microchip fas fa-microchip">
+            <i class="error_500_ban fas fa-ban"></i>  
+        </i>   
+    </div>
+{% endblock %}
