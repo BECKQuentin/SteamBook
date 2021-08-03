@@ -5,40 +5,80 @@
 {% block body %}
 
 <div class="d-flex">
-    <div class="col-3 m-1 card bg-dark border-pink">
-        <h2>Profil</h2>
-    
-            <p>{{profil.personaname}}</p>
-            <img class="w-50" src="{{profil.avatarfull}}" alt="">   
-           
-    </div>
-    
-    <div class="col-7 m-1 border-pink bg-dark">
-        <h2>Jeux</h2>
-        <p>Nombre de jeux : {{count.game_count}}</p>
-    
-        <div class="d-flex flex-wrap">
-            {% for game in games|sort((a, b) => a.name <=> b.name)|slice(0,6) %}
-            <div class="game-card card mb-3 m-1" style="width: 15rem;">
-                <h5 class="card-title mb-2">{{ game.name }}</h5>
-                <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
-                <div class="card-body">
-                    <p class="card-text">Temps jouer: {{ game.playtime_forever }} minutes</p>
-                    <a href="#" class="btn btn-primary">Voir le jeux</a>
+    <div class="col-2 m-1 card bg-dark">
+        <h2 class="m-3">Profil</h2>
+            <div class="mx-3">
+                <div class="userStates m-2">
+                    <h3 class="">{{profil.personaname}}</h3>
+                    {% if profil.personastate == 0 %}
+                        <img class="w-50 offline" src="{{ profil.avatarfull }}" alt="user Picture">
+                    {% elseif profil.personastate == 1 %}
+                        <img class="w-50 online" src="{{ profil.avatarfull }}" alt="user Picture">
+                    {% elseif profil.personastate == 2 %}
+                        <img class="w-50 busy" src="{{ profil.avatarfull }}" alt="user Picture">
+                    {% elseif profil.personastate == 3 %}
+                        <img class="w-50 away" src="{{ profil.avatarfull }}" alt="user Picture">
+                    {% elseif profil.personastate == 4 %}
+                        <img class="w-50 snooze" src="{{ profil.avatarfull }}" alt="user Picture">
+                    {% elseif profil.personastate == 5 %}
+                        <img class="w-50 lookingToTrade" src="{{ profil.avatarfull }}" alt="user Picture">
+                    {% else %}
+                        <img class="w-50 lookingToPlay" src="{{ profil.avatarfull }}" alt="user Picture">
+                    {% endif %}
+                </div>
+                <div>
+                    <p>Profil crée le : {{profil.timecreated|date('Y-m-d H:i:s') }}</p>
                 </div>
             </div>
-            {% endfor %}
+    </div>
+    
+    <div class="col-8 m-1 bg-dark">
+        <h2 class="m-3">Jeux</h2>
+
+        <div class="d-flex flex-column align-items-center mt-3">            
+            <h3 class="mb-2">Jeux joués récemment</h3>            
+            <div class="d-flex flex-wrap">
+                {% for game in recentGames|slice(0, 4) %}
+                    <div class="game-card card bg-blue-card mb-3 m-1 d-flex justify-content-between" style="width: 12rem;">
+                        <h5 class="card-title mb-2 m-1 cyan">{{ game.name|short }}</h5>
+                        <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
+                        <div class="card-body p-2 d-flex flex-column justify-content-between">
+                            <p class="card-text cyan">Temps jouer: {{ (game.playtime_forever / 60)|round(2, 'floor') }} heures</p>
+                            <a href="#" class="btn btn-primary">Voir le jeux</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="d-flex flex-column align-items-center mt-3">   
+            <h3>Tous mes jeux</h3>                 
+            <p class="m-2">Nombre de jeux : {{count.game_count}}</p>        
+            <div class="d-flex flex-wrap justify-content-center">
+                {% for game in games|sort((a, b) => a.name <=> b.name)|slice(0,20) %}
+                <div class="game-card card bg-blue-card mb-3 m-1" style="width: 12rem;">
+                    <h5 class="card-title mb-2 m-1 cyan">{{ game.name|short }}</h5>
+                    <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
+                    <div class="card-body p-2 d-flex flex-column justify-content-between">
+                        <p class="card-text cyan">Temps jouer: {{ (game.playtime_forever / 60)|round(2, 'floor')  }} heures</p>
+                        <a href="#" class="btn btn-primary">Voir le jeux</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
     
-    <div class="col-2 border-pink bg-dark m-1">
-        <h2>Amis</h2>
-        <p>Nombre d'amis :</p>
+    <div class="col-2 bg-dark m-1">
+        <h2 class="m-3">Amis</h2>
+        <p class="m-2">Nombre d'amis : {{friends|length }}</p>
 
-        {% for friend in friendsList %}       
+        {% for friend in friendsList|sort ((a, b) => a.personastate == 1 <=> b.personastate)|reverse %}       
             
-            <div class="userStates d-flex friendsMiniature align-items-center m-2">                
-                {% set value = friend.personastate %}
+            <div class="userStates d-flex friendsMiniature align-items-center m-2">                              
+                
                     {% if friend.personastate == 0 %}
                         <img class="me-1 offline" src="{{ friend.avatarmedium }}" alt="user Picture">
                     {% elseif friend.personastate == 1 %}
@@ -53,7 +93,7 @@
                         <img class="me-1 lookingToTrade" src="{{ friend.avatarmedium }}" alt="user Picture">
                     {% else %}
                         <img class="me-1 lookingToPlay" src="{{ friend.avatarmedium }}" alt="user Picture">
-                {% endif %}
+                    {% endif %}
                 <p class="m-0">{{friend.personaname}}</p>
             </div>
         {% endfor %}

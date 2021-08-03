@@ -13,11 +13,24 @@ html {
 }
 
 /*background - color*/
+.bg-blue-card {
+  background: rgb(0,94,120);
+background: linear-gradient(39deg, rgba(0,94,120,1) 24%, rgba(7,60,94,1) 81%);
+}
+.bg-blue-dark {  
+  background-image: linear-gradient( 110.1deg,  rgba(30,2,83,1) 44.2%, rgba(198,55,160,1) 138.2% );
+}
 .bg-dark{
   background-color: #212121;
 }
+.cyan {
+  color: rgb(18, 199, 199);
+}
 .pink {
   color: mediumorchid;
+}
+.green {
+  color: #538201;
 }
 .border-pink {
   border:1px solid mediumorchid;
@@ -37,6 +50,10 @@ html {
   border: 1px solid #7C3880;
 }
 
+.scale {
+  transform: scale(1);
+  transition: 1s;
+}
 
 /*Header*/
 #logo {
@@ -44,9 +61,10 @@ html {
   width: 100px;
 }
 
-
-
 /*card*/
+.game-card h5{
+  height: 50px !important;
+}
 .game-card:hover {
   cursor: pointer;
   animation: growUp 1s forwards;
