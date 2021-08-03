@@ -13,16 +13,38 @@ class BaseController extends AbstractController
      */
     public function home(): Response
     {
+
+        $jsonGames = file_get_contents('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=97F647085699DE84DDB8E41A4A5F829A&steamid=76561198263045372&format=json&include_appinfo=1');
+
+        $objGames = json_decode($jsonGames, true);
+
+        $games = $objGames["response"]["games"];
         
+        $jsonProfil = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=97F647085699DE84DDB8E41A4A5F829A&steamids=76561198263045372');
+
+        $objProfil = json_decode($jsonProfil, true);
+
+        $profil = $objProfil["response"]["players"][0];
+
         return $this->render('base/home.html.twig', [
-                  
+            'games' => $games,
+            'profil' => $profil,
         ]);
     }
 
     public function header($routeName)
-    {        
+    {      
+        
+        $jsonProfil = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=97F647085699DE84DDB8E41A4A5F829A&steamids=76561198263045372');
+
+        $objProfil = json_decode($jsonProfil, true);
+
+        $profil = $objProfil["response"]["players"][0];
+
         return $this->render('base/_header.html.twig', [ 
-            'route_name' => $routeName
+            'route_name' => $routeName,
+            'profil' => $profil
         ]);  
     }
 }
+

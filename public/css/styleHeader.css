@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@1&family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+
+* {
+        font-family: 'Atkinson Hyperlegible', sans-serif;
+        color: whitesmoke;
+}
+
+.steamNav {
+        background: #110636;
+        background: linear-gradient(173deg,#110636 0%, #000000 50%, #110636 100%);
+}
+
+.userStates {
+        margin-left: 20px;
+        
+}
+
+.userStates .offline {
+        border: 3px solid grey;
+        border-radius: 5px;
+}
+
+.userStates .online {
+        border: 3px solid #2DD5ED;
+        border-radius: 5px;
+}
+
+.userStates .busy {
+        border: 3px solid #ED382D;
+        border-radius: 5px;
+}
+
+.userStates .away {
+        border: 3px solid #F0AE10;
+        border-radius: 5px;
+}
+
+.userStates .snooze {
+        border: 3px solid #2F79F7;
+        border-radius: 5px;
+}
+
+.userStates .lookingToTrade {
+        border: 3px solid #F009D8;
+        border-radius: 5px;
+}
+
+.userStates .lookingToPlay {
+        border: 3px solid #2DD5ED;
+        border-radius: 5px;
+}

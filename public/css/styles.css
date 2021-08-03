@@ -1,13 +1,17 @@
 /*-------Marge à 0 !!!!-----*/
-* {  
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@1&family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+
+* {
+  color: whitesmoke;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: whitesmoke;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
 }
 html {
   font-size: 16px;
 }
+
 /*background - color*/
 .bg-dark{
   background-color: #212121;
