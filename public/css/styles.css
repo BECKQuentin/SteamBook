@@ -37,12 +37,6 @@ html {
   border: 1px solid #7C3880;
 }
 
-<<<<<<< HEAD
-.scale {
-  transform: scale(1);
-  transition: 1s;
-}
-=======
 
 /*Header*/
 #logo {
@@ -99,4 +93,3 @@ html {
     transform: scale(1);
   }
 }
->>>>>>> ae44d8fad386b96edc174f31bea17137256f09c7
