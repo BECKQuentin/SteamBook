@@ -29,3 +29,8 @@ html {
   background-color: #7C3880;
   border: 1px solid #7C3880;
 }
+
+.scale {
+  transform: scale(1);
+  transition: 1s;
+}
