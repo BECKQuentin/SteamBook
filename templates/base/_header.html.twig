@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark steamNav">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img id="logo" src="{{asset('img/icons/favicon.png')}}" alt="icon">
@@ -10,24 +10,33 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">SteamBook</a>
+                <a class="nav-link active" aria-current="page" href="#"><h1>SteamBook</h1></a>
                 </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <li class="nav-item ms-5">
+                <div class="userStates">
+                {% set value = profil.personastate %}
+                    {% if profil.personastate == 0 %}
+                        <img class="offline" src="{{ profil.avatarmedium }}" alt="user Picture">
+                    {% elseif profil.personastate == 1 %}
+                        <img class="online" src="{{ profil.avatarmedium }}" alt="user Picture">
+                    {% elseif profil.personastate == 2 %}
+                        <img class="busy" src="{{ profil.avatarmedium }}" alt="user Picture">
+                    {% elseif profil.personastate == 3 %}
+                        <img class="away" src="{{ profil.avatarmedium }}" alt="user Picture">
+                    {% elseif profil.personastate == 4 %}
+                        <img class="snooze" src="{{ profil.avatarmedium }}" alt="user Picture">
+                    {% elseif profil.personastate == 5 %}
+                        <img class="lookingToTrade" src="{{ profil.avatarmedium }}" alt="user Picture">
+                    {% else %}
+                        <img class="lookingToPlay" src="{{ profil.avatarmedium }}" alt="user Picture">
+                {% endif %}
+                </div>
                 </li>
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <li class="nav-item ms-2">
+                <h3>{{ profil.personaname }}</h3>
+                {% if profil.gameextrainfo is defined %}
+                <span class="ms-1">Joue à <b>{{ profil.gameextrainfo }}</b></span>
+                {% endif %}
                 </li>
             </ul>
             <form class="d-flex">

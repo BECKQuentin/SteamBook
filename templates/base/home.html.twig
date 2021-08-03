@@ -4,6 +4,10 @@
 
 {% block body %}
 
+{% for games in games|sort((a, b) => a.name <=> b.name)|slice(0, 10) %}
+    <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ games.appid }}/{{ games.img_logo_url }}.jpg" alt=""> <br>
+    <span>{{ games.appid }} => {{ games.name }} temps jouer: {{ games.playtime_forever }} minutes</span> <br>
+{% endfor %}
 
 {% endblock %}
 

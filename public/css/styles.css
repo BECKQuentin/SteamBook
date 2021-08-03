@@ -1,8 +1,11 @@
 /*----------------Marge à 0 !!!!-------------*/
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@1&family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Atkinson Hyperlegible', sans-serif;
 }
 html {
   font-size: 16px;
