@@ -10,9 +10,22 @@
 html {
   font-size: 16px;
 }
+/*background*/
 
 /*Header*/
 #logo {
   height: 100px;
   width: 100px;
+}
+
+
+/*color*/
+.btn-pink {
+  background-color: #ba55c0aa;
+  border:1px solid mediumorchid;
+  color: mediumorchid;
+}
+.btn-pink:hover {
+  background-color: #7C3880;
+  border: 1px solid #7C3880;
 }
