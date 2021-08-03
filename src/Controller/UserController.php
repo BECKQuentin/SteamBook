@@ -28,6 +28,8 @@ class UserController extends AbstractController
 
         $profil = $objProfil["response"]["players"][0];
 
+        // dd($profil);
+
         $jsonFriends = file_get_contents('http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=97F647085699DE84DDB8E41A4A5F829A&steamid=76561198263045372&relationship=friend');
 
         $objFriends = json_decode($jsonFriends, true);
@@ -43,14 +45,21 @@ class UserController extends AbstractController
             $profilFriend = $objFriendInfo["response"]["players"][0];
 
             $friendsList[] = $profilFriend;
-        }        
+        }      
+        
+        $jsonRecentGames = file_get_contents('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=97F647085699DE84DDB8E41A4A5F829A&steamid=76561198263045372&format=json');
+        
+        $objRecentGames = json_decode($jsonRecentGames, true);
 
+        $recentGames = $objRecentGames['response']['games'];
+            
         return $this->render('user/index.html.twig', [
             'profil'  => $profil,            
             'games'   => $games,
             'count'   => $count,
             'friends' => $friends,
-            'friendsList' => $friendsList            
+            'friendsList' => $friendsList,
+            'recentGames' => $recentGames,         
             
         ]);
     }
