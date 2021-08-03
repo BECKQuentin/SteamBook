@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My profil{% endblock %}
+
+{% block body %}
+
+<div class="d-flex">
+    <div class="col-3 m-1 card bg-dark border-pink">
+        <h2>Profil</h2>
+    
+            <p>{{profil.personaname}}</p>
+            <img class="w-50" src="{{profil.avatarfull}}" alt="">   
+           
+    </div>
+    
+    <div class="col-7 m-1 border-pink bg-dark">
+        <h2>Jeux</h2>
+        <p>Nombre de jeux : {{count.game_count}}</p>
+    
+        <div class="d-flex flex-wrap">
+            {% for game in games|sort((a, b) => a.name <=> b.name)|slice(0,6) %}
+            <div class="game-card card mb-3 m-1" style="width: 15rem;">
+                <h5 class="card-title mb-2">{{ game.name }}</h5>
+                <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
+                <div class="card-body">
+                    <p class="card-text">Temps jouer: {{ game.playtime_forever }} minutes</p>
+                    <a href="#" class="btn btn-primary">Voir le jeux</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="col-2 border-pink bg-dark m-1">
+        <h2>Amis</h2>
+        <p>Nombre d'amis :</p>
+
+        {% for friend in friendsList %}       
+            
+            <div class="userStates d-flex friendsMiniature align-items-center m-2">                
+                {% set value = friend.personastate %}
+                    {% if friend.personastate == 0 %}
+                        <img class="me-1 offline" src="{{ friend.avatarmedium }}" alt="user Picture">
+                    {% elseif friend.personastate == 1 %}
+                        <img class="me-1 online" src="{{ friend.avatarmedium }}" alt="user Picture">
+                    {% elseif friend.personastate == 2 %}
+                        <img class="me-1 busy" src="{{ friend.avatarmedium }}" alt="user Picture">
+                    {% elseif friend.personastate == 3 %}
+                        <img class="me-1 away" src="{{ friend.avatarmedium }}" alt="user Picture">
+                    {% elseif friend.personastate == 4 %}
+                        <img class="me-1 snooze" src="{{ friend.avatarmedium }}" alt="user Picture">
+                    {% elseif friend.personastate == 5 %}
+                        <img class="me-1 lookingToTrade" src="{{ friend.avatarmedium }}" alt="user Picture">
+                    {% else %}
+                        <img class="me-1 lookingToPlay" src="{{ friend.avatarmedium }}" alt="user Picture">
+                {% endif %}
+                <p class="m-0">{{friend.personaname}}</p>
+            </div>
+        {% endfor %}
+    
+    </div>
+</div>
+
+
+{% endblock %}
