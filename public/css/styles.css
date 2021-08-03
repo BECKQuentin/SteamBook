@@ -1,7 +1,8 @@
-/*----------------Marge à 0 !!!!-------------*/
+/*-------Marge à 0 !!!!-----*/
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@1&family=Atkinson+Hyperlegible:wght@400;700&display=swap');
 
 * {
+  color: whitesmoke;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -10,16 +11,22 @@
 html {
   font-size: 16px;
 }
-/*background*/
 
-/*Header*/
-#logo {
-  height: 100px;
-  width: 100px;
+/*background - color*/
+.bg-dark{
+  background-color: #212121;
+}
+.pink {
+  color: mediumorchid;
+}
+.border-pink {
+  border:1px solid mediumorchid;
+}
+.bg-pink {
+  background-color: #ba55c0aa;
 }
 
-
-/*color*/
+/*btn*/
 .btn-pink {
   background-color: #ba55c0aa;
   border:1px solid mediumorchid;
@@ -30,7 +37,66 @@ html {
   border: 1px solid #7C3880;
 }
 
+<<<<<<< HEAD
 .scale {
   transform: scale(1);
   transition: 1s;
 }
+=======
+
+/*Header*/
+#logo {
+  height: 100px;
+  width: 100px;
+}
+
+
+
+/*card*/
+.game-card:hover {
+  cursor: pointer;
+  animation: growUp 1s forwards;
+}
+/*Friend*/
+.friendsMiniature img {
+  border-radius: 50px;
+  height: 50px;
+  width: 50px;
+}
+
+/*profilState*/
+.userStates .offline {
+  border: 3px solid grey;
+}
+.userStates .online {
+  border: 3px solid #2DD5ED;
+}
+.userStates .busy {
+  border: 3px solid #ED382D;
+}
+.userStates .away {
+  border: 3px solid #F0AE10;
+}
+.userStates .snooze {
+  border: 3px solid #2F79F7;
+}
+.userStates .lookingToTrade {
+  border: 3px solid #F009D8;
+}
+.userStates .lookingToPlay {
+  border: 3px solid #2DD5ED;
+}
+
+/*KeyFrames*/ 
+@keyframes growUp {
+  from {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+>>>>>>> ae44d8fad386b96edc174f31bea17137256f09c7
