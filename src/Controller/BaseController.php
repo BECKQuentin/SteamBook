@@ -21,6 +21,9 @@ class BaseController extends AbstractController
 
         $games = file_get_contents('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=97F647085699DE84DDB8E41A4A5F829A&steamid=76561197960434622&format=json&include_appinfo=1');
     
+        
+        
+        
         return $this->render('base/home.html.twig', [
             'profil' => $profil,            
             'games' => $games
