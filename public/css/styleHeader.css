@@ -49,3 +49,16 @@
         border: 3px solid #2DD5ED;
         border-radius: 5px;
 }
+
+.btn-custom {
+        background: #528c41;
+        border-radius: 0!important;
+        border: none!important;
+}
+
+.form-custom {
+        border-radius: 0!important;
+        background: silver;
+        border: none;
+        color: whitesmoke!important;
+}

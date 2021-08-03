@@ -5,13 +5,21 @@
 {% block body %}
 
 <<<<<<< HEAD
+<div class="scale">
+=======
+<<<<<<< HEAD
     
 =======
+>>>>>>> ae44d8fad386b96edc174f31bea17137256f09c7
 {% for games in games|sort((a, b) => a.name <=> b.name)|slice(0, 10) %}
     <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ games.appid }}/{{ games.img_logo_url }}.jpg" alt=""> <br>
     <span>{{ games.appid }} => {{ games.name }} temps jouer: {{ games.playtime_forever }} minutes</span> <br>
 {% endfor %}
+<<<<<<< HEAD
+</div>
+=======
 >>>>>>> a72aef79fc6e370de45f2aaebce07da41dfe1093
+>>>>>>> ae44d8fad386b96edc174f31bea17137256f09c7
 
 {% endblock %}
 
