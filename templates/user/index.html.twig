@@ -36,15 +36,14 @@
         <h2 class="m-3">Jeux</h2>
 
         <div class="d-flex flex-column align-items-center mt-3">            
-            <h3>Jeux joués récemment</h3>            
+            <h3 class="mb-2">Jeux joués récemment</h3>            
             <div class="d-flex flex-wrap">
                 {% for game in recentGames|slice(0, 4) %}
                     <div class="game-card card bg-blue-card mb-3 m-1 d-flex justify-content-between" style="width: 12rem;">
                         <h5 class="card-title mb-2 m-1 cyan">{{ game.name|short }}</h5>
                         <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
-                        <div class="card-body p-2">
-                            <p class="card-text cyan">Temps jouer: {{ game.playtime_forever / 60|format_number({rounding_mode: 'floor'}) }} heures</p>
-                            <p class="card-text cyan">Amis qui y jouent: </p>
+                        <div class="card-body p-2 d-flex flex-column justify-content-between">
+                            <p class="card-text cyan">Temps jouer: {{ (game.playtime_forever / 60)|round(2, 'floor') }} heures</p>
                             <a href="#" class="btn btn-primary">Voir le jeux</a>
                         </div>
                     </div>
@@ -62,9 +61,8 @@
                 <div class="game-card card bg-blue-card mb-3 m-1" style="width: 12rem;">
                     <h5 class="card-title mb-2 m-1 cyan">{{ game.name|short }}</h5>
                     <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
-                    <div class="card-body p-2">
-                        <p class="card-text cyan">Temps jouer: {{ game.playtime_forever / 60|round  }} heures</p>
-                        <p class="card-text cyan">Amis qui y jouent: </p>
+                    <div class="card-body p-2 d-flex flex-column justify-content-between">
+                        <p class="card-text cyan">Temps jouer: {{ (game.playtime_forever / 60)|round(2, 'floor')  }} heures</p>
                         <a href="#" class="btn btn-primary">Voir le jeux</a>
                     </div>
                 </div>

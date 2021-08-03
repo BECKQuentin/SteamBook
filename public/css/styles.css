@@ -61,11 +61,9 @@ background: linear-gradient(39deg, rgba(0,94,120,1) 24%, rgba(7,60,94,1) 81%);
   width: 100px;
 }
 
-
-
 /*card*/
 .game-card h5{
-  height: 25% !important;
+  height: 50px !important;
 }
 .game-card:hover {
   cursor: pointer;

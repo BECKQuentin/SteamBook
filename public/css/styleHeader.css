@@ -51,7 +51,7 @@
 }
 
 .btn-custom {
-        background: #528c41;
+        background: #528c41 !important;
         border-radius: 0!important;
         border: none!important;
 }
