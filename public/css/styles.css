@@ -113,3 +113,10 @@ background: linear-gradient(39deg, rgba(0,94,120,1) 24%, rgba(7,60,94,1) 81%);
     transform: scale(1);
   }
 }
+
+.chat-bubble {
+  display: inline-flex;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 5px;
+}

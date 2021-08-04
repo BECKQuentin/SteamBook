@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crée Channel{% endblock %}
+
+{% block body %}
+<div class="container" style="height: 89vh">
+    <a href="{{ path('liste_channel') }}" class="btn btn-outline-secondary">Liste Salon</a>
+    <h1 class="text-center">Crée nouveau salon</h1>
+    {{form(form)}}
+</div>
+{% endblock %}

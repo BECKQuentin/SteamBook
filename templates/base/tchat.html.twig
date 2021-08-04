@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tchat{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center">Tchat {{channel}}</h1>
+    {% if tchats is not empty %}
+    <div style="padding: 5px; height: 77vh">
+        {% for tchat in tchats|reverse %}
+            {% if tchat.user == 'Maxime' %}
+                <div class="d-flex justify-content-end">
+                    <div class="chat-bubble" style="background: rgba(30,2,83,1) 44.2%;">
+                        {{tchat.user}}
+                        <br>
+                        {{tchat.message}}
+                    </div>
+                </div>
+            {% else %}
+                <div class="d-flex justify-content-start">
+                    <div class="chat-bubble" style="background: purple;">
+                        {{tchat.user}}
+                        <br>
+                        {{tchat.message}}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Aucun message n'as encore été envoyé
+        </div>
+    {% endif %}
+    {{form(form)}}
+{% endblock %}
