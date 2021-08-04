@@ -28,6 +28,7 @@
                 </div>
                 <div>
                     <p>Profil crée le : {{profil.timecreated|date('Y-m-d H:i:s') }}</p>
+                    <p>Dernière connexion le : {{profil.lastlogoff|date('Y-m-d H:i:s')}}</p>
                 </div>
             </div>
     </div>
@@ -38,7 +39,7 @@
         <div class="d-flex flex-column align-items-center mt-3">            
             <h3 class="mb-2">Jeux joués récemment</h3>            
             <div class="d-flex flex-wrap">
-                {% for game in recentGames|slice(0, 4) %}
+                {% for game in recentGames|slice(0, 6) %}
                     <div class="game-card card bg-blue-card mb-3 m-1 d-flex justify-content-between" style="width: 12rem;">
                         <h5 class="card-title mb-2 m-1 cyan">{{ game.name|short }}</h5>
                         <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
@@ -57,7 +58,7 @@
             <h3>Tous mes jeux</h3>                 
             <p class="m-2">Nombre de jeux : {{count.game_count}}</p>        
             <div class="d-flex flex-wrap justify-content-center">
-                {% for game in games|sort((a, b) => a.name <=> b.name)|slice(0,20) %}
+                {% for game in games|sort((a, b) => a.name <=> b.name) %}
                 <div class="game-card card bg-blue-card mb-3 m-1" style="width: 12rem;">
                     <h5 class="card-title mb-2 m-1 cyan">{{ game.name|short }}</h5>
                     <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
