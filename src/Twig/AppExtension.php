@@ -30,5 +30,4 @@ class AppExtension extends AbstractExtension
     {
         return strlen($str) > 30 ? substr($str,0,30)."..." : $str;  
     }
-
 }
