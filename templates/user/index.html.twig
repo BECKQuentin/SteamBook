@@ -45,7 +45,7 @@
                         <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
                         <div class="card-body p-2 d-flex flex-column justify-content-between">
                             <p class="card-text cyan">Temps jouer: {{ (game.playtime_forever / 60)|round(2, 'floor') }} heures</p>
-                            <a href="#" class="btn btn-primary">Voir le jeux</a>
+                            <a href="https://store.steampowered.com/app/{{ game.appid }}" target="_blank" class="btn btn-primary">Voir le jeux</a>
                         </div>
                     </div>
                 {% endfor %}
@@ -59,20 +59,22 @@
             <p class="m-2">Nombre de jeux : {{count.game_count}}</p>        
             <div class="d-flex flex-wrap justify-content-center">
                 {% for game in games|sort((a, b) => a.name <=> b.name) %}
-                <div class="game-card card bg-blue-card mb-3 m-1" style="width: 12rem;">
-                    <h5 class="card-title mb-2 m-1 cyan">{{ game.name|short }}</h5>
-                    <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
-                    <div class="card-body p-2 d-flex flex-column justify-content-between">
-                        <p class="card-text cyan">Temps jouer: {{ (game.playtime_forever / 60)|round(2, 'floor')  }} heures</p>
-                        <a href="#" class="btn btn-primary">Voir le jeux</a>
+                    {% if game.img_logo_url %}
+                    <div class="game-card card bg-blue-card mb-3 m-1" style="width: 12rem;">
+                        <h5 class="card-title mb-2 m-1 cyan">{{ game.name|short }}</h5>
+                        <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
+                        <div class="card-body p-2 d-flex flex-column justify-content-between">
+                            <p class="card-text cyan">Temps jouer: {{ (game.playtime_forever / 60)|round(2, 'floor')  }} heures</p>
+                            <a href="https://store.steampowered.com/app/{{ game.appid }}" target="_blank" class="btn btn-primary">Voir le jeux</a>
+                        </div>
                     </div>
-                </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
     </div>
     
-    <div class="col-2 bg-dark m-1">
+    <div class="col-2 bg-dark me-1">
         <h2 class="m-3">Amis</h2>
         <p class="m-2">Nombre d'amis : {{friends|length }}</p>
 
