@@ -14,6 +14,14 @@ class BaseController extends AbstractController
     public function home(): Response
     {
 
+        $jsonNews = file_get_contents('http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=440&count=3&maxlength=300&format=json');
+
+        $objNews = json_decode($jsonNews, true);
+
+        $news = $objNews['appnews']['newsitems'];
+        
+        // dd($news);
+        
         $jsonGames = file_get_contents('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=97F647085699DE84DDB8E41A4A5F829A&steamid=76561198263045372&format=json&include_appinfo=1');
 
         $objGames = json_decode($jsonGames, true);
@@ -27,7 +35,7 @@ class BaseController extends AbstractController
         $profil = $objProfil["response"]["players"][0];
 
         return $this->render('base/home.html.twig', [
-            'games' => $games,
+            'news' => $news,
             'profil' => $profil,
         ]);
     }

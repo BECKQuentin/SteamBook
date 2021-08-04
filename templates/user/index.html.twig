@@ -27,78 +27,97 @@
                     {% endif %}
                 </div>
                 <div>
-                    <p>Profil crée le : {{profil.timecreated|date('Y-m-d H:i:s') }}</p>
-                    <p>Dernière connexion le : {{profil.lastlogoff|date('Y-m-d H:i:s')}}</p>
+                    {% if profil.timecreated is defined%}
+                        <p>Profil crée le : {{profil.timecreated|date('Y-m-d H:i:s') }}</p>
+                    {% endif %}
+                    {% if profil.lastlogoff is defined %}
+                        <p>Dernière connexion le : {{profil.lastlogoff|date('Y-m-d H:i:s')}}</p>
+                    {% endif %}                    
                 </div>
             </div>
     </div>
-    
+
     <div class="col-8 m-1 bg-dark">
-        <h2 class="m-3">Jeux</h2>
+        {% if recentGames is not empty or games is not empty %}
+            <h2 class="m-3">Jeux</h2>
 
-        <div class="d-flex flex-column align-items-center mt-3">            
-            <h3 class="mb-2">Jeux joués récemment</h3>            
-            <div class="d-flex flex-wrap">
-                {% for game in recentGames|slice(0, 6) %}
-                    <div class="game-card card bg-blue-card mb-3 m-1 d-flex justify-content-between" style="width: 12rem;">
-                        <h5 class="card-title mb-2 m-1 cyan">{{ game.name|short }}</h5>
-                        <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
-                        <div class="card-body p-2 d-flex flex-column justify-content-between">
-                            <p class="card-text cyan">Temps jouer: {{ (game.playtime_forever / 60)|round(2, 'floor') }} heures</p>
-                            <a href="https://store.steampowered.com/app/{{ game.appid }}" target="_blank" class="btn btn-primary">Voir le jeux</a>
+            <div class="d-flex flex-column align-items-center mt-3">            
+                <h3 class="mb-2">Jeux joués récemment</h3>            
+                <div class="d-flex flex-wrap">
+                    {% for game in recentGames|slice(0, 6) %}
+                        {% if game.name is defined and game.img_logo_url is defined%}
+                        <div class="game-card card bg-blue-card mb-3 m-1 d-flex justify-content-between" style="width: 12rem;">
+                            <h5 class="card-title mb-2 m-1 cyan">{{game.name|short}}</h5>
+                            <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
+                            <div class="card-body p-2 d-flex flex-column justify-content-between">
+                            {% if game.playtime_forever is defined %}
+                                <p class="card-text cyan">Temps jouer: {{ (game.playtime_forever / 60)|round(2, 'floor') }} heures</p>
+                            {% endif %}
+                                <a href="https://store.steampowered.com/app/{{ game.appid }}" target="_blank" class="btn btn-primary">Voir le jeux</a>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div class="d-flex flex-column align-items-center mt-3">   
-            <h3>Tous mes jeux</h3>                 
-            <p class="m-2">Nombre de jeux : {{count.game_count}}</p>        
-            <div class="d-flex flex-wrap justify-content-center">
-                {% for game in games|sort((a, b) => a.name <=> b.name) %}
-                    {% if game.img_logo_url %}
-                    <div class="game-card card bg-blue-card mb-3 m-1" style="width: 12rem;">
-                        <h5 class="card-title mb-2 m-1 cyan">{{ game.name|short }}</h5>
-                        <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
-                        <div class="card-body p-2 d-flex flex-column justify-content-between">
-                            <p class="card-text cyan">Temps jouer: {{ (game.playtime_forever / 60)|round(2, 'floor')  }} heures</p>
-                            <a href="https://store.steampowered.com/app/{{ game.appid }}" target="_blank" class="btn btn-primary">Voir le jeux</a>
-                        </div>
+            
+                <div class="d-flex flex-column align-items-center mt-3">
+                    <h3>Tous mes jeux</h3>
+                    <p class="m-2">Nombre de jeux : {{count.game_count}}</p>
+                    <div class="d-flex flex-wrap justify-content-center">
+                        {% for game in games|sort((a, b) => a.name <=> b.name) %}
+                            {% if game.name is defined and game.img_logo_url is defined %}
+                                <div class="game-card card bg-blue-card mb-3 m-1" style="width: 12rem;">                                    
+                                    <h5 class="card-title mb-2 m-1 cyan">{{ game.name|short }}</h5>
+                                    <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
+                                    <div class="card-body p-2 d-flex flex-column justify-content-between">
+                                    {% if game.playtime_forever is defined %}
+                                        <p class="card-text cyan">Temps jouer: {{ (game.playtime_forever / 60)|round(2, 'floor')  }} heures</p>
+                                    {% endif %}
+                                        <a href="https://store.steampowered.com/app/{{ game.appid }}" target="_blank" class="btn btn-primary">Voir le jeux</a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
+                </div>
+            {% else %}
+                <h3>Aucun Jeux</h3>
+            {% endif %}
         </div>
-    </div>
     
+
+
+
     <div class="col-2 bg-dark me-1">
         <h2 class="m-3">Amis</h2>
         <p class="m-2">Nombre d'amis : {{friends|length }}</p>
 
         {% for friend in friendsList|sort ((a, b) => a.personastate == 1 <=> b.personastate)|reverse %}       
             
-            <div class="userStates d-flex friendsMiniature align-items-center m-2">                              
-                
-                    {% if friend.personastate == 0 %}
-                        <img class="me-1 offline" src="{{ friend.avatarmedium }}" alt="user Picture">
-                    {% elseif friend.personastate == 1 %}
-                        <img class="me-1 online" src="{{ friend.avatarmedium }}" alt="user Picture">
-                    {% elseif friend.personastate == 2 %}
-                        <img class="me-1 busy" src="{{ friend.avatarmedium }}" alt="user Picture">
-                    {% elseif friend.personastate == 3 %}
-                        <img class="me-1 away" src="{{ friend.avatarmedium }}" alt="user Picture">
-                    {% elseif friend.personastate == 4 %}
-                        <img class="me-1 snooze" src="{{ friend.avatarmedium }}" alt="user Picture">
-                    {% elseif friend.personastate == 5 %}
-                        <img class="me-1 lookingToTrade" src="{{ friend.avatarmedium }}" alt="user Picture">
-                    {% else %}
-                        <img class="me-1 lookingToPlay" src="{{ friend.avatarmedium }}" alt="user Picture">
-                    {% endif %}
-                <p class="m-0">{{friend.personaname}}</p>
-            </div>
+            <a href="{{ path('user', {id: friend.steamid}) }}">
+                <div class="userStates d-flex friendsMiniature align-items-center m-2">
+                        {% if friend.personastate == 0 %}
+                            <img class="me-1 offline" src="{{ friend.avatarmedium }}" alt="user Picture">
+                        {% elseif friend.personastate == 1 %}
+                            <img class="me-1 online" src="{{ friend.avatarmedium }}" alt="user Picture">
+                        {% elseif friend.personastate == 2 %}
+                            <img class="me-1 busy" src="{{ friend.avatarmedium }}" alt="user Picture">
+                        {% elseif friend.personastate == 3 %}
+                            <img class="me-1 away" src="{{ friend.avatarmedium }}" alt="user Picture">
+                        {% elseif friend.personastate == 4 %}
+                            <img class="me-1 snooze" src="{{ friend.avatarmedium }}" alt="user Picture">
+                        {% elseif friend.personastate == 5 %}
+                            <img class="me-1 lookingToTrade" src="{{ friend.avatarmedium }}" alt="user Picture">
+                        {% else %}
+                            <img class="me-1 lookingToPlay" src="{{ friend.avatarmedium }}" alt="user Picture">
+                        {% endif %}
+                    <p class="m-0">{{friend.personaname}}</p>
+                </div>
+            </a>
         {% endfor %}
     
     </div>

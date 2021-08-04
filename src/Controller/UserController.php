@@ -9,11 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/user", name="user")
+     * @Route("/user/{id}", name="user")
      */
-    public function index(): Response
+    public function index($id): Response
     {
-        $jsonGames = file_get_contents('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=97F647085699DE84DDB8E41A4A5F829A&steamid=76561198263045372&format=json&include_appinfo=1');
+        $userId = $id;
+
+        $jsonGames = file_get_contents(sprintf('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=97F647085699DE84DDB8E41A4A5F829A&steamid=%s&format=json&include_appinfo=1', $userId));
 
         $objGames = json_decode($jsonGames, true);
 
@@ -21,8 +23,7 @@ class UserController extends AbstractController
 
         $games = $objGames["response"]["games"];
 
-        $jsonProfil = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=97F647085699DE84DDB8E41A4A5F829A&steamids=76561198263045372
-        ');
+        $jsonProfil = file_get_contents(sprintf('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=97F647085699DE84DDB8E41A4A5F829A&steamids=%s', $userId ));
 
         $objProfil = json_decode($jsonProfil, true);
 
@@ -30,7 +31,7 @@ class UserController extends AbstractController
 
         // dd($profil);
 
-        $jsonFriends = file_get_contents('http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=97F647085699DE84DDB8E41A4A5F829A&steamid=76561198263045372&relationship=friend');
+        $jsonFriends = file_get_contents(sprintf('http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=97F647085699DE84DDB8E41A4A5F829A&steamid=%s&relationship=friend', $userId));
 
         $objFriends = json_decode($jsonFriends, true);
 
@@ -45,9 +46,10 @@ class UserController extends AbstractController
             $profilFriend = $objFriendInfo["response"]["players"][0];
 
             $friendsList[] = $profilFriend;
+            
         }      
         
-        $jsonRecentGames = file_get_contents('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=97F647085699DE84DDB8E41A4A5F829A&steamid=76561198263045372&format=json');
+        $jsonRecentGames = file_get_contents(sprintf('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=97F647085699DE84DDB8E41A4A5F829A&steamid=%s&format=json', $userId));
         
         $objRecentGames = json_decode($jsonRecentGames, true);
 
