@@ -58,6 +58,7 @@
             <p class="m-2">Nombre de jeux : {{count.game_count}}</p>        
             <div class="d-flex flex-wrap justify-content-center">
                 {% for game in games|sort((a, b) => a.name <=> b.name) %}
+                {% if game.img_logo_url %}
                 <div class="game-card card bg-blue-card mb-3 m-1" style="width: 12rem;">
                     <h5 class="card-title mb-2 m-1 cyan">{{ game.name|short }}</h5>
                     <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{ game.appid }}/{{ game.img_logo_url }}.jpg" alt="">
@@ -66,6 +67,7 @@
                         <a href="https://store.steampowered.com/app/{{ game.appid }}" target="_blank" class="btn btn-primary">Voir le jeux</a>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
