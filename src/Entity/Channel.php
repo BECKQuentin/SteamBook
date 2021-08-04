@@ -33,7 +33,7 @@ class Channel
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tchat::class, mappedBy="channel")
+     * @ORM\OneToMany(targetEntity=Tchat::class, mappedBy="channel", cascade={"remove"})
      */
     private $tchats;
 

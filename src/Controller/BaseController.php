@@ -28,7 +28,7 @@ class BaseController extends AbstractController
 
     public function header($routeName, ChannelRepository $channelRepository)
     {        
-        $channel = $channelRepository->findAll();
+        $channel = $channelRepository->findRecentChannel(5);
 
         return $this->render('base/_header.html.twig', [ 
             'route_name' => $routeName,
@@ -74,7 +74,7 @@ class BaseController extends AbstractController
     }
 
     /**
-     * @Route("/tchat/create/channel", name="create_channel")
+     * @Route("/tchat/channel/create", name="create_channel")
      */
     public function createChannel(Request $request)
     {
@@ -98,5 +98,34 @@ class BaseController extends AbstractController
         return $this->render('base/createChannel.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/tchat/channel/liste", name="liste_channel")
+     */
+    public function listChannel(ChannelRepository $channelRepository)
+    {
+        $channel = $channelRepository->findAll();
+
+        return $this->render('base/listeChannel.html.twig', [
+            'channels' => $channel,
+        ]);
+    }
+
+    /**
+     * @Route("/tchat/channel/delete/{slug}", name="delete_channel")
+     */
+    public function DeleteChannel(string $slug, ChannelRepository $channelRepository)
+    {
+        $channel = $channelRepository->findOneBy([
+            'slug' => $slug,
+        ]);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($channel);
+        $em->flush();
+
+        $this->addFlash('success', "Le salon a bien été supprimée");
+        return $this->redirectToRoute('liste_channel');
     }
 }

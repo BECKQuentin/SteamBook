@@ -19,6 +19,18 @@ class ChannelRepository extends ServiceEntityRepository
         parent::__construct($registry, Channel::class);
     }
 
+    /**
+     * @return Channel[] Returns an array of Channel objects
+     */
+    public function findRecentChannel($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->setMaxResults($value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Channel[] Returns an array of Channel objects
     //  */
